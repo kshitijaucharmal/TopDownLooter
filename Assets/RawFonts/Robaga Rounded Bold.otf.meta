@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: fdf7544ab5098d9cca67bf8b266c8d98
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Robaga Rounded
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: ca00699d703386c21a5af7c84a59fbdc, type: 3}
+  - {fileID: 12800000, guid: d191a00ca8f4c334d8cab3cbefc6ba2e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

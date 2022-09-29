@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7dc4803b14ca790af98aaa626de80c3b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Robaga Rounded Thin
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 74349f27d821813d7a39622b185d35b0, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

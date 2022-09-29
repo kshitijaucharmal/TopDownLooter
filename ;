@@ -1,0 +1,51 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour {
+
+    [SerializeField] private float speed = 500f;
+    [SerializeField] private LayerMask whatIsGround;
+
+    private Vector3 movement;
+    private Vector3 mousePosition;
+    private Camera cam;
+    private Rigidbody rb;
+    private float angle;
+
+    // Start is called before the first frame update
+    void Start() {
+        rb = GetComponent<Rigidbody>();
+        cam = Camera.main;
+    }
+
+    void GetInputs(){
+        // Movement Input
+        movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+        movement.Normalize();
+
+        // Mouse Input
+        Ray ray = new Ray(cam.ScreenToWorldPoint(Input.mousePosition), -transform.up);
+        RaycastHit hit;
+        Physics.Raycast(ray.origin, ray.direction, out hit)
+        Debug.Log(mousePosition);
+        // mousePosition.y = transform.position.y;
+        var lookDir = (mousePosition - transform.position).normalized;
+        angle = Mathf.Atan2(lookDir.z, lookDir.x) * Mathf.Rad2Deg - 90f;
+    }
+
+    // Update is called once per frame
+    void Update() {
+        GetInputs();
+    }
+
+    void FixedUpdate(){
+        // Tight controls change velocity
+        var vel = rb.velocity;
+        vel = movement * speed * Time.fixedDeltaTime;
+        vel.y = rb.velocity.y;
+        rb.velocity = vel;
+
+        rb.rotation = Quaternion.Euler(0f, angle, 0f);
+    }
+}
