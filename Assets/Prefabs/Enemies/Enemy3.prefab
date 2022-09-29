@@ -409,8 +409,10 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   fill: {fileID: 3430405788975366427}
+  itemsToDrop:
+  - {fileID: 611879622333078526, guid: 547f3fbaf9fb4c94087e5cd6218b15e5, type: 3}
   stats:
-    name: AverageAsMe
+    enemyType: 1
     maxHealth: 600
     speed: 6
     rotationSpeed: 50

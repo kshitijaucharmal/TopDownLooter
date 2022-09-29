@@ -409,8 +409,10 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   fill: {fileID: 4298062175427536472}
+  itemsToDrop:
+  - {fileID: 611879622333078526, guid: 547f3fbaf9fb4c94087e5cd6218b15e5, type: 3}
   stats:
-    name: FastAsWind
+    enemyType: 2
     maxHealth: 300
     speed: 10
     rotationSpeed: 50

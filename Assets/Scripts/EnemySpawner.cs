@@ -28,6 +28,7 @@ public class EnemySpawner : MonoBehaviour {
     [SerializeField] private TMP_Text waveInfo;
 
     [SerializeField] private GameObject[] enemies;
+    [SerializeField] private GameObject pointItLands;
 
     private int enemyCount = 0;
     private float timeBtwnWaves;
@@ -103,6 +104,9 @@ public class EnemySpawner : MonoBehaviour {
         RaycastHit hit;
         if(Physics.Raycast(cameraRay, out hit)){
             if (hit.transform.CompareTag("Ground")){
+                var yup = hit.point + new Vector3(0, 0.2f, 0);
+                var s = Instantiate(pointItLands, yup, Quaternion.Euler(90, 0, 0)).transform;
+                Destroy(s.gameObject, 1f);
                 return true;
             }
             else{
@@ -116,4 +120,10 @@ public class EnemySpawner : MonoBehaviour {
         // Stuff to do when wave ends
         Debug.Log("Wave Ended.");
     }
+}
+
+public enum EnemyType{
+    SLIG, // Slow + Big
+    AVMED, // Average + Medium
+    SMAF // Small + Fast
 }

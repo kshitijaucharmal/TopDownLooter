@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PortalScript : MonoBehaviour {
 
+    [HideInInspector] public EnemyType enemyType;
     [SerializeField] private Gradient[] gradients;
     [SerializeField] private ParticleSystem particleSystem;
     [SerializeField] private SpriteRenderer portalImage;
@@ -15,14 +16,30 @@ public class PortalScript : MonoBehaviour {
     private ParticleSystem.ColorOverLifetimeModule colorOverLife;
     private Gradient currentGradient;
 
-    // Start is called before the first frame update
-    void Start() {
-        // Random For Now
-        currentGradient = gradients[Random.Range(0, gradients.Length)];
+    public void Setup(EnemyType type) {
+        this.enemyType = type;
+
+        switch(type){
+            case EnemyType.SLIG:
+                currentGradient = gradients[0];
+                break;
+            case EnemyType.AVMED:
+                currentGradient = gradients[1];
+                break;
+            case EnemyType.SMAF:
+                currentGradient = gradients[2];
+                break;
+            default:
+                Debug.Log("Somethings Wrong");
+                break;
+        }
+
         colorOverLife = particleSystem.colorOverLifetime;
         colorOverLife.color = currentGradient;
         portalImage.color = currentGradient.Evaluate(0f);
+    }
 
+    void Start(){
         // Destroy in specified time
         Destroy(gameObject, portalDieTime);
     }
@@ -33,7 +50,8 @@ public class PortalScript : MonoBehaviour {
         var enemies = Physics.OverlapSphere(transform.position, effectRadius, enemyLayer);
         foreach(Collider col in enemies){
             EnemyScript enemy = col.GetComponent<EnemyScript>();
-            enemy.GetSucked(transform.position);
+            if(enemy.stats.enemyType == enemyType)
+                enemy.GetSucked(transform.position);
         }
     }
 

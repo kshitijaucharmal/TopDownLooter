@@ -21,7 +21,6 @@ public class ActivateOnCollision : MonoBehaviour {
             script.enabled = enableComponentOnHit;
             rb.useGravity = false;
             rb.isKinematic = true;
-
             this.enabled = disableThisOnHit;
         }
     }

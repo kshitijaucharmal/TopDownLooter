@@ -12,10 +12,14 @@ public class PlayerStats : MonoBehaviour {
         }
         set{
             if(value <= 0){
+                _health = 0;
+                healthSlider.value = 0;
                 Die();
                 return;
             }
-            if(value >= maxHealth){
+            if(value > maxHealth){
+                _health = maxHealth;
+                healthSlider.value = maxHealth;
                 return;
             }
             _health = value;

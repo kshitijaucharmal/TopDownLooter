@@ -112,8 +112,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d3eecf423d28edcab3be2151b5abf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 0
   portalPrefab: {fileID: 7741206451045438073, guid: adba79dc100293b29b5a3a33dddac443,
     type: 3}
+  mats:
+  - {fileID: 2100000, guid: aa8bc6d13be41be099820504a258ef0c, type: 2}
+  - {fileID: 2100000, guid: a52e9f1d91e4a19bebcaf894f1593317, type: 2}
+  - {fileID: 2100000, guid: 820ee8a36a149978298c3ce477a55dc3, type: 2}
 --- !u!54 &2478956113037268365
 Rigidbody:
   m_ObjectHideFlags: 0

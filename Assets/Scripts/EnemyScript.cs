@@ -11,7 +11,9 @@ public class EnemyScript : MonoBehaviour {
         }
         set{
             if(value <= 0){
+                _health = 0;
                 Die();
+                return;
             }
             // Not required cause enemy cannot gain health
             // if(value >= stats.maxHealth) return;
@@ -22,10 +24,14 @@ public class EnemyScript : MonoBehaviour {
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Gradient gradient;
     [SerializeField] private Image fill;
-    [SerializeField] private EnemyStats stats;
+    
+    [SerializeField] private GameObject[] itemsToDrop;
+
+    public EnemyStats stats;
 
     private Transform playerTarget;
     private float speed;
+    private bool dead = false;
 
     void Start(){
         speed = stats.speed;
@@ -47,7 +53,14 @@ public class EnemyScript : MonoBehaviour {
     }
 
     void Die(){
-        // Particle System
+        if(dead) return;
+        int n_items = Random.Range(1, 3);
+        for(int i = 0; i < n_items; i++){
+            GameObject item = itemsToDrop[Random.Range(0, itemsToDrop.Length)];
+            Vector3 pos = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f));
+            Instantiate(item, pos, Quaternion.identity);
+        }
+        dead = true;
         Destroy(gameObject);
     }
 
@@ -73,7 +86,7 @@ public class EnemyScript : MonoBehaviour {
 
 [System.Serializable]
 public class EnemyStats{
-    public string name = "SlowAsShit";
+    public EnemyType enemyType;
     public int maxHealth = 500;
     public float speed = 4f;
     public float rotationSpeed = 50f;
