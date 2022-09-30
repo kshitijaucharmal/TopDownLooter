@@ -15,7 +15,7 @@ public class PickableItem : MonoBehaviour {
         if(other.transform.CompareTag("Player")){
             switch(itemType){
                 case ItemType.HEAL:
-                    other.transform.GetComponent<PlayerStats>().health += 100;
+                    other.transform.GetComponent<PlayerStats>().health += 25;
                     break;
                 case ItemType.INSTANTDEATH:
                     other.transform.GetComponent<PlayerStats>().Die();

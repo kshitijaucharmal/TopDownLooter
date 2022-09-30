@@ -22,6 +22,8 @@ public class PlayerStats : MonoBehaviour {
                 healthSlider.value = maxHealth;
                 return;
             }
+            healthSlider.value = value;
+            fill.color = gradient.Evaluate(healthSlider.normalizedValue);
             _health = value;
         }
     }

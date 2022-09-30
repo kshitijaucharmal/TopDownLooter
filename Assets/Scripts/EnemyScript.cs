@@ -17,6 +17,8 @@ public class EnemyScript : MonoBehaviour {
             }
             // Not required cause enemy cannot gain health
             // if(value >= stats.maxHealth) return;
+            healthSlider.value = value;
+            fill.color = gradient.Evaluate(healthSlider.normalizedValue);
             _health = value;
         }
     }
@@ -24,7 +26,7 @@ public class EnemyScript : MonoBehaviour {
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Gradient gradient;
     [SerializeField] private Image fill;
-    
+
     [SerializeField] private GameObject[] itemsToDrop;
 
     public EnemyStats stats;
@@ -54,7 +56,11 @@ public class EnemyScript : MonoBehaviour {
 
     void Die(){
         if(dead) return;
-        int n_items = Random.Range(1, 3);
+        
+        int n_items = 0;
+        if(Random.Range(0f, 1f) < 0.01f) n_items = 2;
+        if(Random.Range(0f, 1f) < 0.3) n_items = 1;
+
         for(int i = 0; i < n_items; i++){
             GameObject item = itemsToDrop[Random.Range(0, itemsToDrop.Length)];
             Vector3 pos = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f));
@@ -66,8 +72,7 @@ public class EnemyScript : MonoBehaviour {
 
     public void GetSucked(Vector3 pos){
         // Get sucked at this position
-        transform.localScale *= 0.2f;
-        Destroy(gameObject, 2f);
+        Destroy(gameObject);
     }
 
     public void Damage(int val){
