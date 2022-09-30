@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerStats : MonoBehaviour {
 
@@ -33,12 +34,21 @@ public class PlayerStats : MonoBehaviour {
     [SerializeField] private Gradient gradient;
     [SerializeField] private Image fill;
 
+    public int money = 0;
+    [SerializeField] private TMP_Text moneyText;
+
     // Start is called before the first frame update
     void Start() {
         _health = maxHealth;
         healthSlider.maxValue = maxHealth;
         fill.color = gradient.Evaluate(1f);
         healthSlider.value = maxHealth;
+        moneyText.text = 0.ToString();
+    }
+
+    public void AddMoney(int val){
+        money += val;
+        moneyText.text = money.ToString();
     }
 
     public void Die() {

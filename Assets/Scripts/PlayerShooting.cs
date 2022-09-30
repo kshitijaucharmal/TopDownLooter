@@ -26,6 +26,8 @@ public class PlayerShooting : MonoBehaviour {
     [SerializeField] private Image portalIndicator;
     [SerializeField] private Animator animator;
 
+    [SerializeField] private Color purpleColor;
+
     private int portalCtr{
         get{
             return _portalCtr;
@@ -63,6 +65,7 @@ public class PlayerShooting : MonoBehaviour {
         }
     }
     private float _overheatCtr;
+    private PlayerStats stats;
     
     void SetBullet(int ctr){
         // Set portal Bullet
@@ -74,8 +77,8 @@ public class PlayerShooting : MonoBehaviour {
                 break;
             case 1:
                 selectedPortal = EnemyType.AVMED;
-                portalIndicator.color = Color.red;
-                canon.material.color = Color.red;
+                portalIndicator.color = purpleColor;
+                canon.material.color = purpleColor;
                 break;
             case 2:
                 selectedPortal = EnemyType.SMAF;
@@ -89,6 +92,8 @@ public class PlayerShooting : MonoBehaviour {
     }
 
     void Start(){
+        stats = GetComponent<PlayerStats>();
+
         coolDownCtr = coolDownTime;
         overheatSlider.maxValue = overheatTill;
         overheatSlider.value = 0;
@@ -107,6 +112,7 @@ public class PlayerShooting : MonoBehaviour {
             ShootPortals();
         }
 
+        // Scroll to change portal
         float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
 
         if (scroll > 0) {
@@ -116,6 +122,17 @@ public class PlayerShooting : MonoBehaviour {
         if (scroll < 0) {
             if(portalCtr <= 0) portalCtr = 2;
             else portalCtr--;
+        }
+
+        // Buttons to change portal
+        if(Input.GetKeyDown(KeyCode.Alpha1)){
+            portalCtr = 0;
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2)){
+            portalCtr = 1;
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha3)){
+            portalCtr = 2;
         }
 
         // Bullets Shooting
@@ -150,6 +167,28 @@ public class PlayerShooting : MonoBehaviour {
 
     // Shoot Portals
     void ShootPortals(){
+        
+        switch(selectedPortal){
+            case EnemyType.SLIG:
+                if(stats.money >= 50){
+                    stats.money -= 50;
+                }
+                else return;
+                break;
+            case EnemyType.AVMED:
+                if(stats.money >= 20){
+                    stats.money -= 20;
+                }
+                else return;
+                break;
+            case EnemyType.SMAF:
+                if(stats.money >= 10){
+                    stats.money -= 10;
+                }
+                else return;
+                break;
+        }
+
         GameObject portalBullet = Instantiate(portalBulletPrefab, portalShootPoint.position, Quaternion.identity);
         portalBullet.GetComponent<PortalBulletScript>().Setup(selectedPortal);
         portalBullet.GetComponent<Rigidbody>().AddForce(Vector3.up * portalBulletSpeed * Time.deltaTime, ForceMode.Impulse);

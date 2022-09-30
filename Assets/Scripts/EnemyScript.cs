@@ -61,11 +61,19 @@ public class EnemyScript : MonoBehaviour {
         if(Random.Range(0f, 1f) < 0.01f) n_items = 2;
         if(Random.Range(0f, 1f) < 0.3) n_items = 1;
 
-        for(int i = 0; i < n_items; i++){
-            GameObject item = itemsToDrop[Random.Range(0, itemsToDrop.Length)];
-            Vector3 pos = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f));
-            Instantiate(item, pos, Quaternion.identity);
+        if(n_items == 0){
+            for(int i = 0; i < Random.Range(2, 4); i++){
+                Instantiate(itemsToDrop[1], transform.position, Quaternion.identity);
+            }
         }
+        else{
+            for(int i = 0; i < n_items; i++){
+                GameObject item = itemsToDrop[0];
+                Vector3 pos = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 0f, Random.Range(-0.5f, 0.5f));
+                Instantiate(item, pos, Quaternion.identity);
+            }
+        }
+
         dead = true;
         Destroy(gameObject);
     }

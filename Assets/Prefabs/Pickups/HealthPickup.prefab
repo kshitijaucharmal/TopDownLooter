@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
+  force: 10
 --- !u!1 &1321568196457489280
 GameObject:
   m_ObjectHideFlags: 0

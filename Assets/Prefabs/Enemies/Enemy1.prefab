@@ -264,6 +264,7 @@ MonoBehaviour:
   fill: {fileID: 767290466435716151}
   itemsToDrop:
   - {fileID: 611879622333078526, guid: 547f3fbaf9fb4c94087e5cd6218b15e5, type: 3}
+  - {fileID: 4731273042361889953, guid: 3c96f9d8aaa71b528ab89b6a4a81c102, type: 3}
   stats:
     enemyType: 0
     maxHealth: 1000
